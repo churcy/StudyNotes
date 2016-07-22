@@ -1,6 +1,7 @@
+package com.tinytree.nio;
+
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
@@ -22,6 +23,6 @@ public class ChannelExample {
         //transferFrom
         //toChannel.transferFrom(fromChannel,position,count);
         //transferTo
-        fromChannel.transferTo(position,count,toChannel);
+        fromChannel.transferTo(position, count, toChannel);
     }
 }

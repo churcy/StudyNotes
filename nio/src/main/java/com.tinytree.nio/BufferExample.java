@@ -1,3 +1,5 @@
+package com.tinytree.nio;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -7,7 +9,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by Churcy on 2016/7/21.
  */
-public class Buffer {
+public class BufferExample {
 
 
     /**
@@ -62,10 +64,10 @@ public class Buffer {
         accessFile.close();
     }
     //rewind()方法
-    //Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。
+    //BufferExample.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。
     //clear()与compact()方法
     //一旦读完Buffer中的数据，需要让Buffer准备好再次被写入。可以通过clear()或compact()方法来完成。
-    //如果调用的是clear()方法，position将被设回0，limit被设置成 capacity的值。换句话说，Buffer 被清空了。Buffer中的数据并未清除，
+    //如果调用的是clear()方法，position将被设回0，limit被设置成 capacity的值。换句话说，BufferExample 被清空了。Buffer中的数据并未清除，
     //只是这些标记告诉我们可以从哪里开始往Buffer里写数据。
     //如果Buffer中有一些未读的数据，调用clear()方法，数据将“被遗忘”，意味着不再有任何标记会告诉你哪些数据被读过，哪些还没有。
     //如果Buffer中仍有未读的数据，且后续还需要这些数据，但是此时想要先先写些数据，那么使用compact()方法。

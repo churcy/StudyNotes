@@ -1,9 +1,12 @@
+package com.tinytree.nio;
+
 import org.junit.Test;
 
 import java.io.IOException;
-import java.nio.channels.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by Churcy on 2016/7/22.
