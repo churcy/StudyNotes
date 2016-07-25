@@ -30,7 +30,7 @@ Description：archetypeArtifactId（the type of your project ）
 
   it depends on your pom.xml,you can view it in this project
 
-4.commond line
+4.command line
 
 mvn clean
 mvn install
