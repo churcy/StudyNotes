@@ -1,4 +1,4 @@
-Redis 数据结构简介
+#Redis 数据结构简介
 STRING字符串 LIST列表 SET集合 HASH散列 ZSET有序集合
 一般用散列在存储对象 命名空间使用冒号 来分割名字的不同部分 例如 article:82617
 
