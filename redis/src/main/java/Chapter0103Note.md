@@ -20,7 +20,6 @@
 |     BITCOUNT   | ~~将键储存的值加上浮点数amount~~                         |  _incrbyfloat name amount_       |                  |
 |     BITOP      | ~~将键储存的值加上浮点数amount~~                        |   _incrbyfloat name amount_       |                  |
 
-[TOC] 
 
 ### 2.LIST
 
@@ -61,9 +60,20 @@
 |command        |action                                               |  example                                             |     remark      |
 | :-----------: | :------------------------:                          | :---------------:                                  |:------:           |
 |     ZADD      | 将一个代用给定分支的成员添加到有序集合里面               |  _zadd zet-key 705 item zadd zet-key 785 item1_    |                  |
-|     ZRANGE    | 根据元素在有序排列中所处的位置,从有序集合里面获取多个元素 |   _zrange zset-key 0 -1 withsscores_                |                 |
-| ZRANGEBYSCORE | 获取有序集合在给定分值范围内的所有元素                  |  _zrangbyscore zset-key 0 800 withscotes_           |                  |
+|     ZRANGE    | 根据元素在有序排列中所处的位置,从有序集合里面获取多个元素 |   _zrange zset-key start end withsscores_           |start 和end 分别代表排名|
+| ZRANGEBYSCORE | 获取有序集合在给定分值范围内的所有元素                  |  _zrangbyscore zset-key 0 800 withscotes_           | 分值包括开始和结束  |
 |     ZREM      | 如果给定的成员存在有序集合,那么移除这个成员              |  _zrem zset-key item_                               |                  |
+|     ZCARD     | 返回集合的成员数量                                    |  _zcard zset-key_                                   |                  |
+|     ZINCRBY   | 将指定成员的分支加上increment                         |  _zincrby zset-key increment member_                |                  |
+|     ZSCORE    | 返回指定成员的分值                                    |  _zscore zset-key member_                           |                  |
+|     ZCOUNT    | 返回在min 和max之间的成员个数                         |  _zcount zset-key min max_                           |                  |
+|     ZRANK     | 返回成员在集合中的排名                                 |  _zrank zset-key member_                            | 从小到大排序      |
+|     ZREVRANK  | 返回成员在集合中的位置,成员排序按照从大到小              |  _zrevrank zset-key member_                        |                  |
+|     ZREVRANGE | 返回有序集合给定排名范围内的成员,成员排序按照从大到小     |  _zrevrange zset-key start end_                     |start 和end 分别代表排名|
+|ZREVRANGEBYSCORE|获取有序集合在给定分值范围内的所有元素,成员排序按照从大到小|  _zrevrangebyscore zset-key 0 800_                  |start 和end 分别代表分值|
+|ZREMRANGEBYRANK|移除给定排名范围内的成员,成员排序按照从大到小             |  _zrenrangebyrank zset-key start end_               |start 和end 分别代表排名|
+|ZINTERSTORE    |取交集保存到dest-key                                   |  _zinterstore dest-key key-name key \[key ...\]_    | 默认取交集执行sum函数  |
+|ZUNIONSTORE    |取并集保存到dest-key                                   |  _zunionstore dest-key key-name key \[key ...\]_    | 并集和交集都可以设置聚合函数  |
 
 ### 5.HASH
 
@@ -88,5 +98,32 @@
 - LIST列表 
 - SET集合 
 - HASH散列 
-- ZSET有序集合
-~~一般用散列在存储对象 命名空间使用冒号 来分割名字的不同部分 例如 article:82617~~ []( []( []( [](``) ) ) )
+- ZSET有序集合 
+~~一般用散列在存储对象 命名空间使用冒号 来分割名字的不同部分 例如 article:82617~~ 
+
+#发布和订阅
+    listener 订阅 channel ,publisher 负责向channel发送binary string message
+
+###pub and sub
+
+|command        | action                    |example                                     | remark                           |
+| :----:        | :-----:                   |:-----:                                     |:-----:                           |
+|SUBSCRIBE      |订阅一个或者多个频道         | _subscribe channel \[channel...\]_         |                                  |
+|UNSUBSCRIBE    |退订阅一个或者多个频道        | _unsubscribe \[channel \[channel...\]\]_  |如果执行时没有给定频道那么退订所有频道|
+|PUBLISH        |向给定频道发送消息           | _publish channel message_                  |                                   |
+|PSUBSCRIBE     |订阅与给定模式相匹配的所有频道| _psubscribe pattern \[pattern ...\]_        |                                  |
+|PUNSUBSCRIBE   |退订给定模式                 | _punsubscribe \[pattern \[pattern ...\]\]_ |如果执行时没有给定模式那么退订所有模式|
+
+
+#排序
+
+#事务
+    Redis基本事务basic transaction 需要用到MULTI 和 EXEC 命令,在Reids里面,
+    被MULTI 和 EXEC 命令包围的所有命令会一个接一个的执行,直到所有命令都执行完
+```
+public class Redis{
+    public void main (String [] args)[
+      System.out.println("this is markdown!");
+    }
+}    
+```
