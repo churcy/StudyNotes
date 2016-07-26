@@ -1,5 +1,4 @@
 #Redis 数据结构简介
-[TOC]  
 
 ### 1.STRING
 
@@ -20,6 +19,8 @@
 |     SETBIT     | 将字节串看做二进制位串,并将偏移量为offset的二进制值设为value|   _setbit key-name offset value_ |                  |
 |     BITCOUNT   | ~~将键储存的值加上浮点数amount~~                         |  _incrbyfloat name amount_       |                  |
 |     BITOP      | ~~将键储存的值加上浮点数amount~~                        |   _incrbyfloat name amount_       |                  |
+
+[TOC] 
 
 ### 2.LIST
 
