@@ -33,3 +33,14 @@ Description：archetypeArtifactId（the type of your project ）
 
 **mvn** clean
 **mvn** install
+
+### linux防火墙
+chkconfig  iptables  off
+service iptables stop --停止
+service iptables start --启动
+
+centos7 
+
+systemctl start firewalld.service#启动firewall
+systemctl stop firewalld.service#停止firewall
+systemctl disable firewalld.service#禁止firewall开机启动

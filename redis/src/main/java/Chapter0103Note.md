@@ -1,7 +1,7 @@
 #目录
 
 #Redis 数据结构简介
-
+[TOC]
 ### 1.STRING
 
 |command         |action                                               |           example                  |            remark   |

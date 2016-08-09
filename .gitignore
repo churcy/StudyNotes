@@ -11,6 +11,11 @@ target/
 *.iml
 *.iws
 
+# eclipse ignore
+.settings/
+.project
+.classpath
+
 # temp ignore
 *.log
 *.cache

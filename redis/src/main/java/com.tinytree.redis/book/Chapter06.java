@@ -87,6 +87,26 @@ public class Chapter06 {
         conn.del("recent:user");
     }
 
+    public void addUpdateContact(Jedis conn, String user, String contact) {
+        String acList = "recent:" + user;
+        Transaction trans = conn.multi();
+        trans.lrem(acList, 0, contact);
+        trans.lpush(acList, contact);
+        trans.ltrim(acList, 0, 99);
+        trans.exec();
+    }
+
+    public List<String> fetchAutocompleteList(Jedis conn, String user, String prefix) {
+        List<String> candidates = conn.lrange("recent:" + user, 0, -1);
+        List<String> matches = new ArrayList<String>();
+        for (String candidate : candidates) {
+            if (candidate.toLowerCase().startsWith(prefix)){
+                matches.add(candidate);
+            }
+        }
+        return matches;
+    }
+
     public void testAddressBookAutocomplete(Jedis conn) {
         System.out.println("\n----- testAddressBookAutocomplete -----");
         conn.del("members:test");
@@ -332,29 +352,12 @@ public class Chapter06 {
         }
     }
 
-    public void addUpdateContact(Jedis conn, String user, String contact) {
-        String acList = "recent:" + user;
-        Transaction trans = conn.multi();
-        trans.lrem(acList, 0, contact);
-        trans.lpush(acList, contact);
-        trans.ltrim(acList, 0, 99);
-        trans.exec();
-    }
 
     public void removeContact(Jedis conn, String user, String contact) {
         conn.lrem("recent:" + user, 0, contact);
     }
 
-    public List<String> fetchAutocompleteList(Jedis conn, String user, String prefix) {
-        List<String> candidates = conn.lrange("recent:" + user, 0, -1);
-        List<String> matches = new ArrayList<String>();
-        for (String candidate : candidates) {
-            if (candidate.toLowerCase().startsWith(prefix)){
-                matches.add(candidate);
-            }
-        }
-        return matches;
-    }
+
 
     private static final String VALID_CHARACTERS = "`abcdefghijklmnopqrstuvwxyz{";
     public String[] findPrefixRange(String prefix) {
